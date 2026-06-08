@@ -1,55 +1,71 @@
-# Jordan Avery
 
-jordan.avery@example.com · (555) 010-2024 · linkedin.com/in/jordanavery · github.com/jordanavery
-San Francisco, CA (open to remote)
 
-## Summary
+# AMEER HAMZA
 
-Backend-leaning full-stack engineer with 5 years of experience building and operating
-web services in Python and TypeScript. Comfortable owning a feature from design doc to
-production, with a focus on reliability, testing, and developer tooling.
+**Customer Service & Retail Team Member**
 
-## Skills
+1/352 Merrylands Rd, Merrylands NSW 2160 | 0422 801 528 | sonakkorai@gmail.com
 
-- **Languages:** Python, TypeScript, JavaScript, SQL, Go (basic)
-- **Backend:** Django, FastAPI, Node.js/Express, REST & GraphQL APIs
-- **Frontend:** React, Next.js, Tailwind CSS
-- **Data & Infra:** PostgreSQL, Redis, Docker, AWS (ECS, S3, RDS), Terraform, GitHub Actions
-- **Practices:** TDD, code review, incident response, agile/scrum
+---
 
-## Experience
+## Professional Summary
 
-### Senior Software Engineer — Northwind Analytics (2022–present)
+Friendly, reliable and hardworking team member seeking a customer service or retail role. Enjoys helping customers, working as part of a team and keeping things running smoothly in fast-paced, busy environments. Quick to learn, punctual and dependable, with a positive can-do attitude and a genuine focus on good service. Fluent in three languages — a real asset when serving diverse customers. Available for flexible shifts across four days a week, including evenings, weekends and public holidays.
 
-- Led migration of a monolithic Django app to a service-oriented architecture, cutting
-  average API latency by 40%.
-- Built an internal job-scheduling library adopted by 6 teams, reducing duplicated
-  cron/queue code by ~2,000 lines.
-- Mentored 3 junior engineers and ran the team's weekly code-review sessions.
+---
 
-### Software Engineer — Bluegrass Software (2019–2022)
+## Key Skills
 
-- Shipped a customer-facing analytics dashboard (React + FastAPI) used by 10k+ monthly
-  active users.
-- Wrote and maintained CI pipelines (GitHub Actions) that cut deploy time from 25 to 6
-  minutes.
-- Owned on-call rotation for the payments service; reduced P1 incidents by 30% through
-  better alerting and runbooks.
+- Friendly, helpful customer service
+- Clear communication & active listening
+- Teamwork & collaboration
+- Multilingual — fluent in three languages
+- Confident learning POS / register systems
+- Stock handling, shelving & presentation
+- Staying calm and focused in busy periods
+- Reliability, punctuality & strong work ethic
 
-### Junior Developer — Cedar Creek Labs (2017–2019)
+---
 
-- Built internal tooling in Python/Flask for the data-engineering team.
-- Wrote integration tests that raised backend coverage from 52% to 85%.
+## Availability
+
+- Available 4 days a week — including evenings, weekends and public holidays
+- Flexible for casual and part-time shifts; happy to cover extra hours when needed
+- Reliable own transport — full Australian driver's licence
+
+---
 
 ## Education
 
-**B.S. in Computer Science** — University of the Pacific Northwest, 2017
+**Bachelor of Construction Management (Honours)**
+Western Sydney University · Mar 2024 – Present (expected 2027)
 
-## Projects
-
-- **route-planner** — open-source CLI for optimizing multi-stop delivery routes (Python, ~400 GitHub stars)
-- **devnotes** — Markdown-based note-taking app with full-text search (Next.js, TypeScript)
+**Higher School Certificate (HSC)**
+Kellyville High School · Graduated Nov 2023
+Subjects: Mathematics, English, Physics, Engineering, Multimedia
 
 ---
-*This is placeholder sample data. Replace every section above with your real
-information before using this toolkit to apply to actual jobs.*
+
+## Certifications & Licences
+
+- Full Australian driver's licence — reliable transport to and from work
+- White Card — Construction Induction (SafeWork NSW)
+- HSC Certificate (2023) · Kellyville High Multimedia Project Award (2023)
+- Happy to obtain RSA or Food Safety certification if required for the role
+
+---
+
+## Personal Attributes
+
+- Approachable and genuinely enjoys helping people
+- Punctual and dependable — turns up on time, ready to work
+- Keen to learn and take direction from supervisors and team leaders
+- Calm under pressure and works well during busy periods
+- Honest, presentable and takes pride in delivering great service
+
+---
+
+## References
+
+Available on request.
+
