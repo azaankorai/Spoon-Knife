@@ -34,6 +34,20 @@ The agent itself is defined at `.claude/agents/job-apply-agent.md`.
    location, responsibilities, requirements) — the agent works best when the posting
    text is there for it to compare against.
 
+## Got a job link? Drop it in the inbox
+
+`job-apply-agent/jobs/_inbox.md` is a scratch file for new leads. When you find a
+listing on SEEK, Indeed, a company careers page, etc.:
+
+1. Open `_inbox.md` and copy the **Lead template** block.
+2. Paste in the title, company, location, the URL, **and the job description text**
+   (most job sites block automated tools from reading their pages, so pasting the
+   text is what lets the agent actually compare it to your resume — a link alone
+   isn't enough).
+3. Ask Claude Code to "process the leads in `_inbox.md`" (or run `/apply-job`). It
+   will turn each entry into a proper posting file in `jobs/` and generate a tailored
+   cover letter + match summary in `output/`.
+
 ## Usage
 
 In Claude Code, ask the `job-apply-agent` subagent to process one or more postings,

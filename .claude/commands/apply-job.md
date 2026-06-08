@@ -8,8 +8,13 @@ Target posting(s): $ARGUMENTS
 
 - If a filename (or partial name) was given above, find the matching file in
   `job-apply-agent/jobs/` and process only that one.
-- If nothing was given, process every posting in `job-apply-agent/jobs/` that does
-  not already have a corresponding `*-summary.md` file in `job-apply-agent/output/`.
+- If `_inbox.md` has new lead entries below its template (job title/company/link
+  + pasted description text), turn each one into a proper posting `.md` file in
+  `job-apply-agent/jobs/` first (using the same structure as the existing postings),
+  then remove the entry from `_inbox.md` once its posting file exists.
+- Otherwise, process every posting in `job-apply-agent/jobs/` (excluding `_inbox.md`
+  itself and the `example-*` template files) that does not already have a
+  corresponding `*-summary.md` file in `job-apply-agent/output/`.
 
 For each posting processed, write `job-apply-agent/output/<job-file-stem>-summary.md`
 following `templates/application-summary.md` (match assessment, suggested resume
