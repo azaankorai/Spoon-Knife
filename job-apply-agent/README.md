@@ -86,3 +86,17 @@ You can also generate drafts without opening Claude Code, via the
 
 This is just a remote way to run the same generation step — it still only produces
 draft files for you to review; nothing gets submitted anywhere automatically.
+
+## It also runs automatically every morning
+
+The same workflow has a daily schedule built in (07:00 Sydney time / 21:00 UTC). Each
+morning it scans `job-apply-agent/jobs/` for any posting that doesn't yet have a
+draft in `output/`, generates one, and commits it — so if you've added new postings
+(e.g. via the inbox) the night before, drafts are waiting for you when you wake up.
+
+It deliberately **only drafts new postings** on the schedule (it won't regenerate
+ones you already have). And — same as everywhere else in this toolkit — it only
+*prepares* drafts. Actually applying is, and stays, something you choose to do
+yourself: most job platforms prohibit automated/bot applications outright, and a
+human review step is what keeps these drafts honest and worth sending rather than
+spam. Requires the same `ANTHROPIC_API_KEY` secret as the manual button above.

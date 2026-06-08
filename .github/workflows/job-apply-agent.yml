@@ -1,9 +1,15 @@
-# Manually-triggered workflow that runs the job-apply-agent.
+# Runs the job-apply-agent on a daily schedule and on manual demand.
 #
-# Click "Run workflow" on this workflow in the Actions tab to generate a
-# tailored cover letter + match summary for one (or all) job postings in
-# job-apply-agent/jobs/, written to job-apply-agent/output/ and committed
-# back to the branch you ran it on.
+# - Every morning (07:00 Sydney time), it scans job-apply-agent/jobs/ for any
+#   posting that doesn't yet have a draft in job-apply-agent/output/, generates
+#   a tailored cover letter + match summary for each, and commits them.
+# - You can also click "Run workflow" in the Actions tab any time to process a
+#   specific posting (or force-regenerate everything with "all").
+#
+# IMPORTANT: this only ever *prepares draft files* for you to review. It never
+# submits, emails, or posts an application anywhere - that stays a manual,
+# human decision (most job sites prohibit automated applications anyway, and
+# a human review step is what keeps these drafts worth sending).
 #
 # Setup required: add an ANTHROPIC_API_KEY secret to this repository
 # (Settings -> Secrets and variables -> Actions -> New repository secret).
@@ -12,13 +18,17 @@
 name: Run Job Apply Agent
 
 on:
+  schedule:
+    # 21:00 UTC = 07:00 AEST / 08:00 AEDT (Sydney). Only processes postings
+    # that don't already have a draft - it won't regenerate existing ones.
+    - cron: '0 21 * * *'
   workflow_dispatch:
     inputs:
       job_file:
         description: >-
           Filename of a posting in job-apply-agent/jobs/ to process
-          (e.g. retail-sales-assistant-parramatta.md), or "all" for every
-          posting in that folder.
+          (e.g. retail-sales-assistant-parramatta.md), or "all" to
+          (re)generate drafts for every posting in that folder.
         required: false
         default: 'all'
 
@@ -43,7 +53,10 @@ jobs:
       - name: Run job-apply-agent
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          JOB_FILE: ${{ inputs.job_file }}
+          JOB_FILE: ${{ inputs.job_file || 'all' }}
+          # Scheduled runs only draft NEW postings; manual runs can force a
+          # full regeneration by explicitly passing job_file=all.
+          SKIP_EXISTING: ${{ github.event_name == 'schedule' && 'true' || 'false' }}
         run: python job-apply-agent/run_agent.py
 
       - name: Commit generated drafts

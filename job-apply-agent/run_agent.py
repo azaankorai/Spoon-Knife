@@ -93,20 +93,32 @@ def process_job(client: anthropic.Anthropic, job_path: Path, resume: str,
 
 def main() -> int:
     job_arg = os.environ.get("JOB_FILE", "all").strip()
+    skip_existing = os.environ.get("SKIP_EXISTING", "false").strip().lower() == "true"
 
     if job_arg and job_arg.lower() != "all":
         job_paths = [JOBS_DIR / job_arg]
+        missing = [p for p in job_paths if not p.is_file()]
+        for p in missing:
+            print(f"::error::Job posting not found: {p}", file=sys.stderr)
+        job_paths = [p for p in job_paths if p.is_file()]
     else:
-        job_paths = sorted(JOBS_DIR.glob("*.md"))
+        missing = []
+        # Skip the inbox scratch file and the mismatched example/template postings -
+        # they aren't real applications to draft for this candidate.
+        job_paths = [
+            p for p in sorted(JOBS_DIR.glob("*.md"))
+            if not p.name.startswith("_") and not p.name.startswith("example-")
+        ]
 
-    missing = [p for p in job_paths if not p.is_file()]
-    for p in missing:
-        print(f"::error::Job posting not found: {p}", file=sys.stderr)
-    job_paths = [p for p in job_paths if p.is_file()]
+    if skip_existing:
+        job_paths = [
+            p for p in job_paths
+            if not (OUTPUT_DIR / f"{p.stem}-summary.md").is_file()
+        ]
 
     if not job_paths:
-        print("::error::No job postings to process.", file=sys.stderr)
-        return 1
+        print("Nothing to process - no new postings without an existing draft.")
+        return 1 if missing else 0
 
     resume = load(ROOT / "resume.md")
     cover_letter_template = load(ROOT / "templates" / "cover-letter.md")
