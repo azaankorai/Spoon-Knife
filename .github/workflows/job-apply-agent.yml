@@ -1,0 +1,59 @@
+# Manually-triggered workflow that runs the job-apply-agent.
+#
+# Click "Run workflow" on this workflow in the Actions tab to generate a
+# tailored cover letter + match summary for one (or all) job postings in
+# job-apply-agent/jobs/, written to job-apply-agent/output/ and committed
+# back to the branch you ran it on.
+#
+# Setup required: add an ANTHROPIC_API_KEY secret to this repository
+# (Settings -> Secrets and variables -> Actions -> New repository secret).
+# Get a key at https://console.anthropic.com/.
+
+name: Run Job Apply Agent
+
+on:
+  workflow_dispatch:
+    inputs:
+      job_file:
+        description: >-
+          Filename of a posting in job-apply-agent/jobs/ to process
+          (e.g. retail-sales-assistant-parramatta.md), or "all" for every
+          posting in that folder.
+        required: false
+        default: 'all'
+
+permissions:
+  contents: write
+
+jobs:
+  run-agent:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install anthropic
+
+      - name: Run job-apply-agent
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          JOB_FILE: ${{ inputs.job_file }}
+        run: python job-apply-agent/run_agent.py
+
+      - name: Commit generated drafts
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add job-apply-agent/output
+          if git diff --cached --quiet; then
+            echo "No new drafts to commit."
+          else
+            git commit -m "Generate application drafts via job-apply-agent workflow"
+            git push
+          fi
