@@ -16,7 +16,7 @@ against your resume.
 
 ### {{Job title}} — {{Company}}
 
-- **Link:** {{paste the URL here}}
+- **Link:** {{[paste the URL here](https://au.seek.com/job/92482351/apply?sol=350fa3cffcba0c3b5a751169d25e4e73214b439f)}}
 - **Location:** {{suburb, e.g. Merrylands NSW}}
 
 {{Paste the job description / responsibilities / requirements text here}}
