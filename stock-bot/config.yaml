@@ -1,0 +1,50 @@
+# Trading mode - THIS IS THE MOST IMPORTANT SETTING IN THIS FILE.
+#
+#   paper: true   -> uses Alpaca's paper-trading sandbox (fake money, real market
+#                    data, identical API to live trading). ALWAYS start here.
+#   paper: false  -> places REAL orders with REAL money. Only flip this after you
+#                    have watched the bot run on paper for a meaningful stretch
+#                    (weeks, not hours) and are comfortable with its behaviour
+#                    AND its losses.
+trading:
+  paper: true
+
+  # Stocks the bot is allowed to consider. Keep this list short while you're
+  # learning how the bot behaves - more symbols = more API calls = more chances
+  # for something unexpected to happen.
+  watchlist:
+    - AAPL
+    - MSFT
+    - SPY
+
+  # How often the trading loop runs during market hours.
+  poll_interval_seconds: 300
+
+# Trend-following strategy parameters (simple moving-average crossover):
+#   - "Golden cross"  (fast SMA crosses ABOVE slow SMA) -> buy signal
+#   - "Death cross"   (fast SMA crosses BELOW slow SMA) -> sell/exit signal
+# This is a deliberately simple, well-understood strategy. It will NOT reliably
+# "beat the market" - trend-following has long flat/losing stretches. Treat this
+# as a transparent baseline to observe and improve on, not a money machine.
+strategy:
+  fast_sma_period: 20
+  slow_sma_period: 50
+  bar_timeframe: "1Day"   # how the SMAs are computed (daily bars)
+  lookback_days: 200      # history fetched to compute the SMAs
+
+# Risk controls - HARD LIMITS the bot cannot exceed, regardless of what the
+# strategy "wants" to do. These exist to bound how much you can lose, not to
+# guarantee profit. Tune them to an amount you are fully prepared to lose.
+risk:
+  # Never put more than this fraction of total account equity into one symbol.
+  max_position_size_pct: 0.10
+
+  # Sell a position automatically if it falls this far below your entry price.
+  stop_loss_pct: 0.05
+
+  # If the account's total loss for the day reaches this fraction of the
+  # morning's starting equity, the bot stops opening new positions and
+  # (optionally) liquidates for the rest of the session. This is the single
+  # most important guardrail - it caps how bad one day can get.
+  daily_loss_limit_pct: 0.03
+  liquidate_on_circuit_breaker: true
